@@ -3,4 +3,4 @@ pandas
 xgboost
 joblib
 matplotlib
-sklearn
+scikit-learn
