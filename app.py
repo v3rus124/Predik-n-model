@@ -49,5 +49,5 @@ if uploaded_file is not None:
         ax.legend()
         st.pyplot(fig)
 # Zobrazení výsledku
-predikce = df["Predikce dodávky tepla"].sum()
-st.write(f"### Predikované množství tepla: {predikce:.2f} GJ/den")
+#predikce = df["Predikce dodávky tepla"].sum()
+#st.write(f"### Predikované množství tepla: {predikce:.2f} GJ/den")
