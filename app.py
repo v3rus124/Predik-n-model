@@ -3,6 +3,7 @@ import pandas as pd
 import xgboost as xgb
 import joblib
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Načtení trénovaného modelu
 model = xgb.XGBRegressor()
@@ -29,16 +30,24 @@ if uploaded_file is not None:
         df["Topna_sezona"] = df["mesic"].apply(lambda x: 1 if x in [10, 11, 12, 1, 2, 3, 4, 5] else 0)
         df["heat_demand_lag_1"] = df.apply(lambda x: df1[(x["mesic"], x["hodina"])], axis=1)
         
+        df["month_sin"] = np.sin(2 * np.pi * df["mesic"] / 12)
+        df["month_cos"] = np.cos(2 * np.pi * df["mesic"] / 12)
+
+        df["hour_sin"] = np.sin(2 * np.pi * df["hodina"] / 24)
+        df["hour_cos"] = np.cos(2 * np.pi * df["hodina"] / 24)
+
+        df["day_of_week_sin"] = np.sin(2 * np.pi * df["den_v_tydnu"] / 7)
+        df["day_of_week_cos"] = np.cos(2 * np.pi * df["den_v_tydnu"] / 7)
         
-        
-        X_new = df[['Teplota venkovní', 'hodina', 'den_v_tydnu', 'mesic',"Topna_sezona", "heat_demand_lag_1"]]
+        X_new = df[['Teplota venkovní', 'hodina', 'den_v_tydnu', 'mesic',"Topna_sezona", "heat_demand_lag_1", "month_sin", "month_cos", "hour_sin", "hour_cos", "day_of_week_sin", "day_of_week_cos"]]  # Zvol správné featury
+
         predictions = model.predict(X_new)
         # Predikce
         df["Predikce dodávky tepla"] = predictions
         
         # Zobrazení výsledků
         st.write("### Výsledky predikce:")
-        st.dataframe(df[["hodina", "Teplota venkovní", "Predikce dodávky tepla"]])
+        st.dataframe(df[["timestamp", "Teplota venkovní", "Predikce dodávky tepla"]])
         
         # Graf
         fig, ax = plt.subplots()
