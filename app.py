@@ -49,4 +49,4 @@ if uploaded_file is not None:
         ax.legend()
         st.pyplot(fig)
 # Zobrazení výsledku
-st.write(f"### Predikované množství tepla: {predictions:.2f} MW")
+#st.write(f"### Predikované množství tepla: {predictions:.2f} MW")
