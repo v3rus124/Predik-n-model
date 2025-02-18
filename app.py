@@ -42,11 +42,12 @@ if uploaded_file is not None:
         
         # Graf
         fig, ax = plt.subplots()
-        ax.plot(df["hodina"], df["Predikce dodávky tepla"], marker="o", linestyle="-", label="Predikované teplo")
+        ax.plot(df["hodina"], df["Predikce dodávky tepla"], marker="o", linestyle="-", label="Predikovaná dodávka tepla")
         ax.set_xlabel("Hodina")
-        ax.set_ylabel("Množství tepla (MW)")
-        ax.set_title("Predikce tepla pro následujících 24 hodin")
+        ax.set_ylabel("Množství tepla (GJ/h)")
+        ax.set_title("Predikce tepla pro následujících 24 hodin - EPRU")
         ax.legend()
         st.pyplot(fig)
 # Zobrazení výsledku
-#st.write(f"### Predikované množství tepla: {predictions:.2f} MW")
+predikce = df["Predikce dodávky tepla"].sum()
+st.write(f"### Predikované množství tepla: {predikce:.2f} GJ/den")
