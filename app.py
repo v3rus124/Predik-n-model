@@ -15,7 +15,7 @@ st.title("Predikce potřebného tepla podle venkovní teploty")
 uploaded_file = st.file_uploader("Nahrajte Excel soubor (.xlsx)", type=["xlsx"])
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file)
-    df["Teplota venkovní"] = df["Teplota venkovní"].astype(str).str.replace(',', '.').astype(float)
+    df["Teplota_venkovní"] = df["Teplota venkovní"].astype(str).str.replace(',', '.').astype(float)
     df["Datum"] = pd.to_datetime(df["Datum"], format="%d.%m.%y %H:%M")
     # Kontrola, zda soubor obsahuje správná data
     if "Teplota venkovní" not in df.columns or len(df) != 24:
@@ -41,7 +41,7 @@ if uploaded_file is not None:
 
         predictions = model.predict(X_new)
         # Predikce
-        df["Predikce dodávky tepla"] = predictions
+        df["Predikce_dodávky_tepla"] = predictions
         
         # Zobrazení výsledků
         st.write("### Výsledky predikce:")
