@@ -49,7 +49,7 @@ if uploaded_file is not None:
         
         # Graf
         fig, ax = plt.subplots()
-        ax.plot(df["hodina"], df["Predikce dodávky tepla"], marker="o", linestyle="-", label="Predikovaná dodávka tepla")
+        ax.plot(df["hodina"], df["Predikce_dodávky_tepla"], marker="o", linestyle="-", label="Predikovaná dodávka tepla")
         ax.set_xlabel("Hodina")
         ax.set_ylabel("Množství tepla (GJ/h)")
         ax.set_title("Predikce tepla pro následujících 24 hodin - EPRU")
