@@ -45,7 +45,7 @@ if uploaded_file is not None:
         
         # Zobrazení výsledků
         st.write("### Výsledky predikce:")
-        st.dataframe(df[["Datum", "Teplota venkovní", "Predikce dodávky tepla"]])
+        st.dataframe(df[["Datum", "Teplota_venkovní", "Predikce_dodávky_tepla"]])
         
         # Graf
         fig, ax = plt.subplots()
